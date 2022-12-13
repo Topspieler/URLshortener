@@ -1,0 +1,6 @@
+/.env
+/node_modules
+/craco.config.js
+/package-lock.json
+/package.json
+/tailwind.config.js

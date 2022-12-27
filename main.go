@@ -12,9 +12,7 @@ func main() {
 	router := gin.Default()
 
 	router.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"data": "Hello from Gin-gonic & mongoDB",
-		})
+		c.File("./public/index.html")
 	})
 	configs.ConnectDB()
 

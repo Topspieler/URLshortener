@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <style> 
+    body {
+  background: #c0e1fc; /* set the background color to red */
+  }
+    .button{
+    background-color: #7a7fdbb3;
+    border-radius: 14px;   
+    position: relative;
+    /*width: 900px;
+    height: 100px;*/
+    font-size: 10vw; /* set the font size to 10% of the viewport width */
+    height: 30vh; /* set the height to 10% of the viewport height */
+    width: vw; /*set the width to 10% of the viewport width  */
+    filter: blur(1px);
+  } 
+  .button:hover {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+  .button:active {
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  .buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+    </style>
+  </head>
+  <body>
+    <div class="buttons">
+      <button class="button">Button 1</button>
+      <button class="button">Button 2</button>
+      <button class="button">Button 3</button>
+    </div>
+  </body>
+</html>

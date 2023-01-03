@@ -11,5 +11,6 @@ func OrderRoute(router *gin.Engine) {
 	router.GET("/api/order/:orderId", controllers.GetAOrder())
 	router.DELETE("/api/order/:orderId", controllers.DeleteAOrder())
 	router.GET("/api/orders", controllers.GetAllOrders())
+	router.GET("/:shortURL", controllers.RedirectHandler())
 
 }

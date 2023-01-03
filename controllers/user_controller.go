@@ -138,7 +138,7 @@ func RedirectHandler() gin.HandlerFunc {
 
 		objId, _ := primitive.ObjectIDFromHex(shortURL)
 
-		err := orderCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&order)
+		err := orderCollection.FindOne(ctx, bson.M{"_id": objId}).Decode(&order)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
 			return

@@ -6,6 +6,7 @@ import (
 	"URLshortener/responses"
 	"context"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -125,5 +126,29 @@ func GetAllOrders() gin.HandlerFunc {
 		c.JSON(http.StatusOK,
 			responses.UserResponse{Status: http.StatusOK, Message: "success", Data: map[string]interface{}{"data": orders}},
 		)
+	}
+}
+
+func RedirectHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		shortURL := c.Param("shortURL")
+		var order models.Order
+		defer cancel()
+
+		objId, _ := primitive.ObjectIDFromHex(shortURL)
+
+		err := orderCollection.FindOne(ctx, bson.M{"id": objId}).Decode(&order)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, responses.UserResponse{Status: http.StatusInternalServerError, Message: "error", Data: map[string]interface{}{"data": err.Error()}})
+			return
+		}
+
+		//c.JSON(http.StatusOK, responses.UserResponse{Status: http.StatusOK, Message: "success", Data: map[string]interface{}{"data": order}})
+		url := order.URL
+		if !strings.HasPrefix(url, "http://") && !strings.HasPrefix(url, "https://") {
+			url = "http://" + url
+		}
+		c.Redirect(http.StatusFound, url)
 	}
 }

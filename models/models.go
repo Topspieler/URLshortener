@@ -5,6 +5,7 @@ import (
 )
 
 type Order struct {
-	ID  primitive.ObjectID `bson:"id,omitempty"`
-	URL string             `json:"url,omitempty" validate:"required"`
+	ID   primitive.ObjectID `bson:"id,omitempty"`
+	HASH string             `json:"hash,omitempty" validate:"required"`
+	URL  string             `json:"url,omitempty" validate:"required"`
 }
